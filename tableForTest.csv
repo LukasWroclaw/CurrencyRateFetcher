@@ -1,0 +1,26 @@
+Date,Transaction ID:,Details,Turnover,Balance,Currency
+01.01.2022 01:34,1,Loan 2 - principal received,0.723282693,7.903498233,EUR
+01.01.2022 01:35,2,Loan 3 - interest received,0.082874284,7.986372516,EUR
+05.01.2022 00:07,3,Loan 1 - The loan was repurchased. Reason: The loan agreement was amended.: interest received,0.085847222,66.91010995,EUR
+05.01.2022 00:07,4,Loan 3 - The loan was repurchased. Reason: The loan agreement was amended.: Principal received,17.66,84.57010995,EUR
+05.01.2022 00:34,5,Loan b - The loan was repurchased. Reason: The loan was repaid early by the borrower.: interest received,0.082344098,84.65245405,EUR
+05.01.2022 00:34,6,Loan 5 - The loan was repurchased. Reason: The loan was repaid early by the borrower.: Principal received,10.06583204,94.71828609,EUR
+07.01.2022 00:50,7,Loan 6 - The loan was repurchased. Reason: The loan agreement was amended.: interest received,0.063484439,2.75272683,EUR
+07.01.2022 09:50,11,Loan 7 - The loan was repurchased. Reason: The loan agreement was amended.: Principal received,21.8,21.89502397,EUR
+07.01.2022 09:53,12,Loan5 - investment in loan  ,-20.49,1.405023971,EUR
+07.01.2022 15:14,13,Loan 4 - interest received,0.050194693,1.455218663,EUR
+10.01.2022 12:09,14,Deposits,10.98,15.66845465,EUR
+10.01.2022 12:11,15,Deposits,11,26.66845465,EUR
+10.01.2022 12:11,16,Loan 7 - investment in loan  ,-26.66,0.008454653,EUR
+10.01.2022 15:21,17,Deposits,11.01,11.01845465,EUR
+10.01.2022 17:10,18,Loan 4 - The loan was repurchased. Reason: The loan term was prolonged.: interest received,0.020033333,0.028487987,EUR
+10.01.2022 17:10,19,Loan 6 - The loan was repurchased. Reason: The loan term was prolonged.: Principal received,12.02,12.04848799,EUR
+10.01.2022 17:11,20,Loan 7 - The loan was repurchased. Reason: The loan was more than 60 days late and the buyback obligation was triggered.: interest received,0.031208333,12.07969632,EUR
+10.01.2022 17:11,21,Loan 7 - The loan was repurchased. Reason: The loan was more than 60 days late and the buyback obligation was triggered.: interest received,0.086188054,12.16588437,EUR
+10.01.2022 17:11,22,Loan 4 - The loan was repurchased. Reason: The loan was more than 60 days late and the buyback obligation was triggered.: interest received,0.078686819,12.24457119,EUR
+10.01.2022 17:11,24,Loan 7 - The loan was repurchased. Reason: The loan was more than 60 days late and the buyback obligation was triggered.: late payment interest received,0.014440241,12.26644838,EUR
+10.01.2022 17:11,25,Loan 4- The loan was repurchased. Reason: The loan was more than 60 days late and the buyback obligation was triggered.: Principal received,16.05,28.31644838,EUR
+10.01.2022 17:12,26,Loan 9 - The loan was repurchased. Reason: The loan term was prolonged.: interest received,0.07892,28.39536838,EUR
+10.01.2022 17:12,27,Loan 2 - The loan was repurchased. Reason: The loan term was prolonged.: Principal received,19.73,48.12536838,EUR
+10.01.2022 17:17,28,Loan 4 - investment in loan  ,-18.12,0.005368381,EUR
+11.01.2022 00:55,33,Loan 5 - late fees received,0.000248871,1.041002413,EUR
