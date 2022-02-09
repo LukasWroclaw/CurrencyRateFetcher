@@ -1,0 +1,6 @@
+Date,Transaction ID:,Details,Turnover,Balance,Currency
+01.01.2022 01:34,1,Loan 2 - principal received,0.723282693,7.903498233,EUR
+01.01.2022 01:35,2,Loan 3 - interest received,0.082874284,7.986372516,EUR
+05.01.2022 00:07,3,Loan 1 - The loan was repurchased. Reason: The loan agreement was amended.: interest received,0.085847222,66.91010995,EUR
+05.01.2022 00:07,4,Loan 3 - The loan was repurchased. Reason: The loan agreement was amended.: Principal received,17.66,84.57010995,EUR
+07.01.2022 09:53,12,Loan5 - investment in loan  ,-20.49,1.405023971,EUR
