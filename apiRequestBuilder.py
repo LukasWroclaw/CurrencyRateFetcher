@@ -7,7 +7,7 @@ Created on Mon Feb  7 11:36:20 2022
 """
 from datetime import date
 import unittest
-testuj = 1
+testuj = 0
 
 ## http://api.nbp.pl/api/exchangerates/rates/a/gbp/2012-01-01/2012-01-31/
 

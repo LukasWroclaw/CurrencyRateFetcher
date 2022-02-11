@@ -8,7 +8,7 @@ Created on Mon Feb  7 11:31:10 2022
 import unittest
 
 import requests
-testuj = 1
+testuj = 0
     
 class httpRequestHandler(object):
     
@@ -32,6 +32,12 @@ class httpRequestHandler(object):
             dictForRates[date] = value
             
         return dictForRates
+    
+    def getCurrencyRatesInDics(self, urlAddress):
+        receivedJson = self.getJsonFileFromUrl(urlAddress)
+        dictionary = self.convertJsonToDict(receivedJson)
+        return dictionary
+        
             
         
 
@@ -46,7 +52,13 @@ class TestingClass(unittest.TestCase):
             dictionary = requestHandler.convertJsonToDict(receivedJson)
             expectedDict = {'2021-01-04': 4.5485, '2021-01-05': 4.5446, '2021-01-07': 4.4973}
             self.assertEqual(dictionary, expectedDict)
-
+            
+    def test_WholeFunctionality(self):
+            requestText = "http://api.nbp.pl/api/exchangerates/rates/a/eur/2021-01-04/2021-01-07/"
+            requestHandler = httpRequestHandler()
+            dictionary = requestHandler.getCurrencyRatesInDics(requestText)
+            expectedDict = {'2021-01-04': 4.5485, '2021-01-05': 4.5446, '2021-01-07': 4.4973}
+            self.assertEqual(dictionary, expectedDict)
 
 
 if(testuj):

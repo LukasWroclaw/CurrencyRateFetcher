@@ -11,7 +11,7 @@ Created on Tue Feb  8 12:16:22 2022
 import csv
 import unittest
 
-testuj = 1
+testuj = 0
 
 class getDataFromCSVhandler(object):
     
@@ -75,12 +75,26 @@ class getDataFromCSVhandler(object):
               
           
         return dictionaryWithIncome
+    
+    
+    def getIncomeDictionaryFromFile(self, fileName):
+        listWithData = self.getDataFromFile(fileName)
+        incomeDictionary = self.getConvertedData(listWithData)
+        
+        return incomeDictionary
         
         
     
         
         
 class TestingClass(unittest.TestCase):
+    
+    def test_e2eFunction(self):
+            fileName = 'tableForTestShort.csv'
+            handler = getDataFromCSVhandler()
+            incomeDictionary = handler.getIncomeDictionaryFromFile(fileName)
+            incomeForParticularDay = incomeDictionary['2022-01-01']
+            self.assertEqual(incomeForParticularDay, 0.082874284)
   
     def test_getConvertedData1(self):
             fileName = 'tableForTestShort.csv'
