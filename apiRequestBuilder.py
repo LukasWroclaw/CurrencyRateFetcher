@@ -5,11 +5,16 @@ Created on Mon Feb  7 11:36:20 2022
 @author: marszale
 
 """
+from utilityFunctions import intToStrWithZero
 from datetime import date
 import unittest
 testuj = 0
 
 ## http://api.nbp.pl/api/exchangerates/rates/a/gbp/2012-01-01/2012-01-31/
+
+
+
+
 
 class apiRequestBuilder(object):
     prefixText = "http://api.nbp.pl/api/exchangerates/rates/a/"
@@ -26,8 +31,8 @@ class apiRequestBuilder(object):
     
     def convertDateToRequestFormat(self, date):
         year = str(date.year)
-        month = self.intToStrWithZero(date.month)
-        day = self.intToStrWithZero(date.day)
+        month = intToStrWithZero(date.month)
+        day = intToStrWithZero(date.day)
             
         
         
