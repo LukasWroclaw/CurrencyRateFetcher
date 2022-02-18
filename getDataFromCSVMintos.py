@@ -13,7 +13,7 @@ import unittest
 
 testuj = 0
 
-class getDataFromCSVhandler(object):
+class getDataFromCSVhandlerMintos(object):
     
     def isIncome(self, detailsString):
         if "interest received" in detailsString:
@@ -91,14 +91,14 @@ class TestingClass(unittest.TestCase):
     
     def test_e2eFunction(self):
             fileName = 'tableForTestShort.csv'
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             incomeDictionary = handler.getIncomeDictionaryFromFile(fileName)
             incomeForParticularDay = incomeDictionary['2022-01-01']
             self.assertEqual(incomeForParticularDay, 0.082874284)
   
     def test_getConvertedData1(self):
             fileName = 'tableForTestShort.csv'
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
             incomeDictionary = handler.getConvertedData(listWithData)
             incomeForParticularDay = incomeDictionary['2022-01-01']
@@ -108,7 +108,7 @@ class TestingClass(unittest.TestCase):
 
     def test_getConvertedData2(self):
             fileName = 'tableForTest.csv'
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
             incomeDictionary = handler.getConvertedData(listWithData)
             incomeForParticularDay = incomeDictionary['2022-01-07']
@@ -117,25 +117,25 @@ class TestingClass(unittest.TestCase):
     
     def test_getDataFromFile1(self):
             fileName = 'tableForTestShort.csv'
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
             self.assertEqual(len(listWithData), 5)
             
     def test_getDataFromFile2(self):
             fileName = 'tableForTestShort.csv'
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
             secondRow = listWithData[1]
             self.assertEqual(secondRow['Transaction ID:'], '2')
     
     def test_isIncome1(self):
             detailsText = "Loan 4 - investment in loan "
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             self.assertEqual(handler.isIncome(detailsText), 0)
             
     def test_isIncome2(self):
             detailsText = "Loan 1 - The loan was repurchased. Reason: The loan agreement was amended.: interest received "
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             self.assertEqual(handler.isIncome(detailsText), 1)
             
 

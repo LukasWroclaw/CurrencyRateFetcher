@@ -7,7 +7,7 @@ Created on Mon Feb  7 10:55:19 2022
 from datetime import date, datetime, timedelta
 from httpRequestHandler import httpRequestHandler
 from apiRequestBuilder import apiRequestBuilder
-from getDataFromCSV import getDataFromCSVhandler
+from getDataFromCSV import getDataFromCSVhandlerMintos
 from utilityFunctions import intToStrWithZero
 
 
@@ -101,7 +101,7 @@ class TestingClass(unittest.TestCase):
         requestHandler = httpRequestHandler()
         rateDictionary = requestHandler.getCurrencyRatesInDics(requestText)
         fileName = 'tableForTestShort.csv'
-        csvHandler = getDataFromCSVhandler()
+        csvHandler = getDataFromCSVhandlerMintos()
         incomeDictionary = csvHandler.getIncomeDictionaryFromFile(fileName)
         calculator = mainCalculator()
         calculator.calculateIncomeInPln(rateDictionary, incomeDictionary)
