@@ -23,8 +23,6 @@ class mainCalculator(object):
         self.dictIncomeInPlnPerDay = {}
         
     def findKeyFromRateTable(self, rateDict, key):
-        if key in rateDict:
-            return key
         
         found = 0
         dayInStringUnderSearch = key
@@ -64,28 +62,9 @@ class mainCalculator(object):
 
 
 
-"""
-handler = apiRequestBuilder()
-requestText = handler.buildRequest("eur", date(2021, 12, 28), date(2022, 1, 31))
-print(requestText)
-
-requestHandler = httpRequestHandler()
-dictionary = requestHandler.getCurrencyRatesInDics(requestText)
-print("\nReceived values\n\n")
-print(dictionary)
-
-fileName = 'tableForTestShort.csv'
-csvHandler = getDataFromCSVhandler()
-incomeDictionary = csvHandler.getIncomeDictionaryFromFile(fileName)
-print(incomeDictionary)
 
 
 
-
-
-"""
-
-## suma pln z listy short: 0.773253414148
 
 
 class TestingClass(unittest.TestCase):
@@ -104,15 +83,15 @@ class TestingClass(unittest.TestCase):
         
     def test_incomeInPln1(self):
         calculator = mainCalculator()
-        rateDict  = {"2021-10-01": 2, "2021-10-02": 3}
+        rateDict  = {"2021-09-30": 1, "2021-10-01": 2, "2021-10-02": 3}
         incomeDict = {"2021-10-01": 4, "2021-10-02": 7}
         calculator.calculateIncomeInPln(rateDict, incomeDict)
-        self.assertEqual(calculator.dictIncomeInPlnPerDay["2021-10-01"], 8)
+        self.assertEqual(calculator.dictIncomeInPlnPerDay["2021-10-01"], 4)
  
     def test_incomeInPln2(self):
         calculator = mainCalculator()
         rateDict  = {"2021-10-01": 2, "2021-10-02": 3}
-        incomeDict = {"2021-10-01": 4, "2021-10-03": 7}
+        incomeDict = {"2021-10-02": 4, "2021-10-03": 7}
         calculator.calculateIncomeInPln(rateDict, incomeDict)
         self.assertEqual(calculator.dictIncomeInPlnPerDay["2021-10-03"], 21)
         
@@ -126,7 +105,7 @@ class TestingClass(unittest.TestCase):
         incomeDictionary = csvHandler.getIncomeDictionaryFromFile(fileName)
         calculator = mainCalculator()
         calculator.calculateIncomeInPln(rateDictionary, incomeDictionary)
-        self.assertEqual(round(calculator.provideSum(),4), round(0.773253414148,4))
+        self.assertEqual(round(calculator.provideSum(),4), round(0.7738,4))
         
         
 
