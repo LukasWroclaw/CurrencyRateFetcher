@@ -141,13 +141,13 @@ class TestingClass(unittest.TestCase):
 
     def test_isIncome3(self):
             detailsText = "Loan 5 - late fees received"
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             self.assertEqual(handler.isIncome(detailsText), 1)
             
             
     def test_dateConversion1(self):
             rawDateText = "10.01.2022  12:11:00"
-            handler = getDataFromCSVhandler()
+            handler = getDataFromCSVhandlerMintos()
             self.assertEqual(handler.convertDate(rawDateText), "2022-01-10")
 
 
