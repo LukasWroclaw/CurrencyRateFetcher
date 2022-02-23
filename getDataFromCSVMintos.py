@@ -24,7 +24,6 @@ class getDataFromCSVhandlerMintos(object):
         return 0
     
     def convertDate(self, rawDate):
-      
         splitted = rawDate.split(".")
         
         dayInt = int(splitted[0])

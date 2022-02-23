@@ -7,12 +7,12 @@ Created on Mon Feb  7 10:55:19 2022
 from datetime import date, datetime, timedelta
 from httpRequestHandler import httpRequestHandler
 from apiRequestBuilder import apiRequestBuilder
-from getDataFromCSV import getDataFromCSVhandlerMintos
+from getDataFromCSVMintos import getDataFromCSVhandlerMintos
 from utilityFunctions import intToStrWithZero
 
 
 import unittest
-testuj = 1
+testuj = 0
 
 
 
@@ -23,15 +23,15 @@ class mainCalculator(object):
         self.dictIncomeInPlnPerDay = {}
         
     def findKeyFromRateTable(self, rateDict, key):
-        
         found = 0
         dayInStringUnderSearch = key
-        maxCounter = len(rateDict) + 5
+        maxCounter = 10
         counter = 0
         
         while(found == 0):
             counter = counter + 1
             if(counter > maxCounter):
+                print("Debug, cannot found:", dayInStringUnderSearch)
                 return "error no date"
             splitted = dayInStringUnderSearch.split("-")
             currentDate = date(int(splitted[0]), int(splitted[1]), int(splitted[2]))
@@ -56,8 +56,18 @@ class mainCalculator(object):
             
         return sum
             
-        
 
+##print("Start")
+##handler = apiRequestBuilder()
+##requestText = handler.buildRequest("eur", date(2021, 10, 29), date(2021, 12, 31))
+##requestHandler = httpRequestHandler()
+##rateDictionary = requestHandler.getCurrencyRatesInDics(requestText)
+##fileName = 'listopadGrudzien.csv' 
+##csvHandler = getDataFromCSVhandlerMintos()
+##incomeDictionary = csvHandler.getIncomeDictionaryFromFile(fileName)
+##calculator = mainCalculator()
+##calculator.calculateIncomeInPln(rateDictionary, incomeDictionary)
+##print("Suma zyskow:", calculator.provideSum())
         
 
 
