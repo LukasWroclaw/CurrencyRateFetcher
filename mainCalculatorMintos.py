@@ -22,6 +22,7 @@ class mainCalculator(object):
     def __init__(self):
         self.dictIncomeInPlnPerDay = {}
         self.dictTaxInPlnPerDay = {}
+        self.dictFeeInPlnPerDay = {}
         
     def findKeyFromRateTable(self, rateDict, key):
         found = 0
@@ -57,11 +58,11 @@ class mainCalculator(object):
             
         return sum
     
-    def calculateTaxInPln(self, rateDict, currencyDict):
+    def calculateTaxInPln(self, rateDict, taxDict):
         
-        for key, value in currencyDict.items():
+        for key, value in taxDict.items():
             rateKey = self.findKeyFromRateTable(rateDict, key)
-            self.dictTaxInPlnPerDay[key] = rateDict[rateKey] * currencyDict[key]
+            self.dictTaxInPlnPerDay[key] = rateDict[rateKey] * taxDict[key]
         
     def provideTaxSum(self):
         sum = 0
@@ -70,22 +71,38 @@ class mainCalculator(object):
             sum = sum + element
             
         return sum
+    
+    def calculateFeeInPln(self, rateDict, feeDict):
+        
+        for key, value in feeDict.items():
+            rateKey = self.findKeyFromRateTable(rateDict, key)
+            self.dictFeeInPlnPerDay[key] = rateDict[rateKey] * feeDict[key]
+        
+    def provideFeeSum(self):
+        sum = 0
+        
+        for element in self.dictFeeInPlnPerDay.values():
+            sum = sum + element
+            
+        return sum
 
             
 
 print("Start")
 handler = apiRequestBuilder()
-requestText = handler.buildRequest("eur", date(2023, 9, 28), date(2023, 12, 31))
+requestText = handler.buildRequest("eur", date(2025, 9, 28), date(2026, 1, 2))
 requestHandler = httpRequestHandler()
 rateDictionary = requestHandler.getCurrencyRatesInDics(requestText)
 fileName = 'q4.csv' 
 csvHandler = getDataFromCSVhandlerMintos()
-incomeDictionary, taxDictionary = csvHandler.getIncomeAndTaxDictionaryFromFile(fileName)
+incomeDictionary, taxDictionary, feeDictionary = csvHandler.getIncomeAndTaxDictionaryFromFile(fileName)
 calculator = mainCalculator()
 calculator.calculateIncomeInPln(rateDictionary, incomeDictionary)
 print("Suma zyskow:", calculator.provideIncomeSum())
 calculator.calculateTaxInPln(rateDictionary, taxDictionary)
 print("Suma podatku za granica:", calculator.provideTaxSum())
+calculator.calculateFeeInPln(rateDictionary, feeDictionary)
+print("Suma oplat mintos", calculator.provideFeeSum())
         
 
 
@@ -125,17 +142,19 @@ class TestingClass(unittest.TestCase):
         
     def test_e2e1(self):
         handler = apiRequestBuilder()
-        requestText = handler.buildRequest("eur", date(2023, 3, 31), date(2023, 4, 6))
+        requestText = handler.buildRequest("eur", date(2023, 3, 31), date(2023, 4, 7))
         requestHandler = httpRequestHandler()
         rateDictionary = requestHandler.getCurrencyRatesInDics(requestText)
         fileName = 'tableForTestShort.csv'
         csvHandler = getDataFromCSVhandlerMintos()
-        incomeDictionary, taxDictionary = csvHandler.getIncomeAndTaxDictionaryFromFile(fileName)
+        incomeDictionary, taxDictionary, feeDictionary = csvHandler.getIncomeAndTaxDictionaryFromFile(fileName)
         calculator = mainCalculator()
         calculator.calculateIncomeInPln(rateDictionary, incomeDictionary)
         self.assertEqual(round(calculator.provideIncomeSum(),4), round(1.7786,4))
         calculator.calculateTaxInPln(rateDictionary, taxDictionary)
         self.assertEqual(round(calculator.provideTaxSum(),4), round(-0.2339,4))
+        calculator.calculateFeeInPln(rateDictionary, feeDictionary)
+        self.assertEqual(round(calculator.provideFeeSum(),4), round(-0.1404,4))
         
         
 

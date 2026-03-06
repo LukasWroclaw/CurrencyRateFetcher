@@ -16,7 +16,7 @@ testuj = 0
 class getDataFromCSVhandlerMintos(object):
     
     def isIncome(self, detailsString):
-        incomeStrings = ["Interest received", "Late fees received", "Interest received from loan repurchase", "Interest received from overdue payments"]
+        incomeStrings = ["Interest received", "Late fees received", "Interest received from loan repurchase", "Interest received from overdue payments","Interest received from pending payments", "Delayed interest income on transit rebuy"]
         
         for element in incomeStrings:
             if element in detailsString:
@@ -28,6 +28,12 @@ class getDataFromCSVhandlerMintos(object):
     def isTax(self, detailsString):
         
         if detailsString in "Tax withholding" :
+            return 1
+        
+        return 0
+    
+    def isFee(self, detailsString):
+        if detailsString in "Mintos Core fee" :
             return 1
         
         return 0
@@ -80,6 +86,7 @@ class getDataFromCSVhandlerMintos(object):
     def getConvertedData(self, listOfRows):
         dictionaryWithIncome = {}
         dictionaryWithTax = {}
+        dictionaryWithFee = {}
         
        
         for row in listOfRows:           
@@ -90,16 +97,22 @@ class getDataFromCSVhandlerMintos(object):
            elif self.isTax(row["Payment Type"]):
                key = self.convertDate(row["Date"])
                self.addOrUpdateElementInDictionary(dictionaryWithTax, key, float(row["Turnover"]))
+               
+           elif self.isFee(row["Payment Type"]):
+               key = self.convertDate(row["Date"])
+               self.addOrUpdateElementInDictionary(dictionaryWithFee, key, float(row["Turnover"]))
+               
+               
               
           
-        return dictionaryWithIncome, dictionaryWithTax
+        return dictionaryWithIncome, dictionaryWithTax, dictionaryWithFee
     
     
     def getIncomeAndTaxDictionaryFromFile(self, fileName):
         listWithData = self.getDataFromFile(fileName)
-        incomeDictionary, dictionaryWithTax = self.getConvertedData(listWithData)
+        incomeDictionary, dictionaryWithTax, dictionaryWithFee = self.getConvertedData(listWithData)
         
-        return incomeDictionary, dictionaryWithTax
+        return incomeDictionary, dictionaryWithTax, dictionaryWithFee
         
         
     
@@ -110,17 +123,19 @@ class TestingClass(unittest.TestCase):
     def test_e2eFunction(self):
             fileName = 'tableForTestShort.csv'
             handler = getDataFromCSVhandlerMintos()
-            incomeDictionary, taxDictrionary = handler.getIncomeAndTaxDictionaryFromFile(fileName)
+            incomeDictionary, taxDictrionary, feeDictionary = handler.getIncomeAndTaxDictionaryFromFile(fileName)
             incomeForParticularDay = incomeDictionary['2023-04-04']
             taxForParticularDay = taxDictrionary['2023-04-05']
+            feeForParticularDay = feeDictionary['2023-04-06']
             self.assertEqual(incomeForParticularDay, 0.38)
             self.assertEqual(taxForParticularDay, -0.05)
+            self.assertEqual(feeForParticularDay, -0.03)
   
     def test_getConvertedData1(self):
             fileName = 'tableForTestShort.csv'
             handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
-            incomeDictionary, taxDictrionary = handler.getConvertedData(listWithData)
+            incomeDictionary, taxDictrionary, feeDictionary = handler.getConvertedData(listWithData)
             incomeForParticularDay = incomeDictionary['2023-04-04']
             self.assertEqual(incomeForParticularDay, 0.38)
 
@@ -131,7 +146,7 @@ class TestingClass(unittest.TestCase):
             fileName = 'tableForTestShort.csv'
             handler = getDataFromCSVhandlerMintos()
             listWithData = handler.getDataFromFile(fileName)
-            self.assertEqual(len(listWithData), 6)
+            self.assertEqual(len(listWithData), 7)
             
     def test_getDataFromFile2(self):
             fileName = 'tableForTestShort.csv'
@@ -170,6 +185,11 @@ class TestingClass(unittest.TestCase):
             detailsText = "Late fees received"
             handler = getDataFromCSVhandlerMintos()
             self.assertEqual(handler.isTax(detailsText), 0)
+            
+    def test_isFee(self):
+            detailsText = "Mintos Core fee"
+            handler = getDataFromCSVhandlerMintos()
+            self.assertEqual(handler.isFee(detailsText), 1)
             
             
     def test_dateConversion1(self):
